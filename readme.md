@@ -2,6 +2,7 @@
 
 A fully integrated project setup with Angular2, Spring Boot and e2e tests controlled by Maven build.
 
+
 ## Prerequisites
 
 > Install angular cli
