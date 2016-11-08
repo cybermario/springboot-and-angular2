@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sandbox</groupId>
+  <artifactId>backend-ui</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>backend-ui</name>
+  <description>demo backend-ui</description>
+
+  <parent>
+    <groupId>com.sandbox</groupId>
+    <artifactId>root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>start-third-parties</id>
+            <phase>pre-integration-test</phase>
+            <configuration>
+              <target>
+                <exec executable="${run.command}"
+                      dir="${basedir}/scripts"
+                      spawn="true">
+                  <arg value="${run.command.additionnal.arg}"/>
+                  <arg value="${basedir}/scripts/${ng.serve.start.script}"/>
+                </exec>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop-third-parties</id>
+            <phase>post-integration-test</phase>
+            <configuration>
+              <target>
+                <exec executable="${run.command}"
+                      dir="${basedir}/scripts"
+                      spawn="false">
+                  <arg value="${run.command.additionnal.arg}"/>
+                  <arg value="${basedir}/scripts/${ng.serve.stop.script}"/>
+                </exec>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <executions>
+          <execution>
+            <id>ng build</id>
+            <configuration>
+              <executable>ng</executable>
+              <arguments>
+                <argument>build</argument>
+              </arguments>
+            </configuration>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>ng e2e</id>
+            <configuration>
+              <executable>ng</executable>
+              <arguments>
+                <argument>e2e</argument>
+              </arguments>
+            </configuration>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--      <plugin>
+			  <groupId>com.github.greengerong</groupId>
+			  <artifactId>maven-ng-protractor</artifactId>
+			  <version>0.0.2</version>
+			  <configuration>
+				<protractor>protractor</protractor>
+				<configFile>protractor.conf.js</configFile>
+			  </configuration>
+			  <executions>
+				<execution>
+				  <id>ng-protractor</id>
+				  <phase>integration-test</phase>
+				  <goals>
+					<goal>run</goal>
+				  </goals>
+				</execution>
+			  </executions>
+			</plugin>-->
+
+      <!--Build paketieren-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>build zip file</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>assembly.xml</descriptor>
+              </descriptors>
+              <appendAssemblyId>false</appendAssemblyId>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>windows-properties</id>
+      <activation>
+        <os>
+          <family>Windows</family>
+        </os>
+      </activation>
+      <properties>
+        <run.command>cmd</run.command>
+        <run.command.additionnal.arg>/c</run.command.additionnal.arg>
+        <ng.serve.start.script>start-serve.bat</ng.serve.start.script>
+        <ng.serve.stop.script>stop-serve.bat</ng.serve.stop.script>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux-properties</id>
+      <activation>
+        <os>
+          <family>unix</family>
+        </os>
+      </activation>
+      <properties>
+        <run.command>sh</run.command>
+        <run.command.additionnal.arg></run.command.additionnal.arg>
+        <ng.serve.start.script>start-serve.sh</ng.serve.start.script>
+        <ng.serve.stop.script>stop-serve.sh</ng.serve.stop.script>
+      </properties>
+    </profile>
+  </profiles>
+
+</project>
