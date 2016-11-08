@@ -24,7 +24,7 @@ $ npm install
 # start the server
 $ ng serve
 ```
-go to ['http://localhost:4200]('http://localhost:4200) in your browser.
+go to ['http://localhost:4200]('http://localhost:4200') in your browser.
 
 
 ## Maven Build
