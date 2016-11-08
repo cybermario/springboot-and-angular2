@@ -26,6 +26,15 @@ public class BackendApplicationTests {
     }
 
     @Test
+    public void index() {
+        ResponseEntity<String> entity = this.restTemplate
+                .getForEntity("/", String.class);
+
+        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        //assertThat(entity.getBody()).isEqualTo("hello");
+    }
+
+    @Test
     public void reverse() {
         ResponseEntity<String> entity = this.restTemplate
                 .getForEntity("/reverse?input=olleh", String.class);

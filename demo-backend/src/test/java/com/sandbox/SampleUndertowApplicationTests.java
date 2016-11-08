@@ -42,7 +42,7 @@ public class SampleUndertowApplicationTests {
 
 	@Test
 	public void testHome() throws Exception {
-		assertOkResponse("/", "Hello World");
+		assertOkResponse("/sync", "Hello World");
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class SampleUndertowApplicationTests {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.set("Accept-Encoding", "gzip");
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-		ResponseEntity<byte[]> entity = this.restTemplate.exchange("/", HttpMethod.GET,
+		ResponseEntity<byte[]> entity = this.restTemplate.exchange("/sync", HttpMethod.GET,
 				requestEntity, byte[].class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		GZIPInputStream inflater = new GZIPInputStream(

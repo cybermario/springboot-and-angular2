@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 public class ClientApplication extends SpringBootServletInitializer {
 
-    @Bean
+    //@Bean
     public BackendSender mySender() {
         return new BackendSender();
     }

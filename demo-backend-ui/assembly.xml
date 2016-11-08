@@ -11,7 +11,7 @@
   <fileSets>
     <fileSet>
       <directory>${basedir}/dist</directory>
-      <outputDirectory>webroot</outputDirectory>
+      <outputDirectory>static</outputDirectory>
       <excludes>
         <exclude>**/static/images/**</exclude>
         <exclude>**/static/templates/**</exclude>

@@ -17,7 +17,7 @@ public class SampleController {
     @Autowired
     private HelloWorldService helloWorldService;
 
-    @GetMapping("/")
+    @GetMapping("/sync")
     public String helloWorld() {
         return this.helloWorldService.getHelloMessage();
     }

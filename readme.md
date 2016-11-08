@@ -34,3 +34,22 @@ To build the whole project change to root directory and then do
 `mvn install`
 
 
+## Architecture
+
+This demo project contains 3 Maven modules.
+
+The `demo-backend-ui` module contains an AngularJS 2 app managed by Angular Cli.
+Maven bundles the Angular app by means of the `maven-assembly-plugin` into the resulting jar file.
+The location within the .jar is `/static`.
+
+By using the `maven-dependency-plugin` the module `demo-backend` unpacks the `/static` folder of the
+`demo-backend-ui` module, which in turn is used by `spring-boot-starter-web` as its static resource directory.
+
+At least we have the `demo-client` module which currently is there only for demo purpose.
+
+
+
+
+
+
+
