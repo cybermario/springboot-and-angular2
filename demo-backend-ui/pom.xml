@@ -4,17 +4,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sandbox</groupId>
-  <artifactId>backend-ui</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <artifactId>demo-backend-ui</artifactId>
 
   <name>backend-ui</name>
   <description>demo backend-ui</description>
 
   <parent>
     <groupId>com.sandbox</groupId>
-    <artifactId>root</artifactId>
+    <artifactId>demo-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>..</relativePath>
   </parent>
 
   <properties>

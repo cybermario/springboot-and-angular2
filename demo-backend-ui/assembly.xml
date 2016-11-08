@@ -3,19 +3,19 @@
   -->
 
 <assembly>
-    <id>assembly</id>
-    <formats>
-        <format>jar</format>
-    </formats>
-    <includeBaseDirectory>false</includeBaseDirectory>
-    <fileSets>
-        <fileSet>
-            <directory>${project.build.directory}/classes</directory>
-            <!--<outputDirectory>webroot</outputDirectory>-->
-            <!--<excludes>-->
-                <!--<exclude>**/static/images/**</exclude>-->
-                <!--<exclude>**/static/templates/**</exclude>-->
-            <!--</excludes>-->
-        </fileSet>
-    </fileSets>
+  <id>assembly</id>
+  <formats>
+    <format>jar</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>${basedir}/dist</directory>
+      <outputDirectory>webroot</outputDirectory>
+      <excludes>
+        <exclude>**/static/images/**</exclude>
+        <exclude>**/static/templates/**</exclude>
+      </excludes>
+    </fileSet>
+  </fileSets>
 </assembly>

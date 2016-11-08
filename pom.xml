@@ -8,12 +8,12 @@
 
 
 	<groupId>com.sandbox</groupId>
-	<artifactId>root</artifactId>
+	<artifactId>demo-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>demo root</name>
-	<description>demo root</description>
+	<name>demo parent</name>
+	<description>demo parent</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
